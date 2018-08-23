@@ -22,6 +22,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +112,7 @@ public interface ProfileServiceClient {
         }
 
         Moshi defaultMoshi() {
-            return new Moshi.Builder().add(new Rfc3339DateJsonAdapter()).build();
+            return new Moshi.Builder().add(Date.class, new Rfc3339DateJsonAdapter().nullSafe()).build();
         }
 
         /**
