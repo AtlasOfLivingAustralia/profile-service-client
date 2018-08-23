@@ -1,0 +1,8 @@
+build/
+out/
+.gradle/
+.idea/
+.project
+.classpath
+src/main/out
+src/test/out
