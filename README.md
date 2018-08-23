@@ -10,6 +10,6 @@ Provides a Java client for calling web services made available by the [profile-s
 
 ```
 ./gradlew assemble
-./gradlew deploy // to upload to ALA Nexus
+./gradlew publish // to upload to ALA Nexus
 ```
 
