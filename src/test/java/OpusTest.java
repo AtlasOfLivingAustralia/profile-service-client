@@ -4,10 +4,12 @@ import okhttp3.OkHttpClient;
 import org.junit.Ignore;
 import org.junit.Test;
 import retrofit2.Call;
+import retrofit2.Response;
 
 import java.util.Collections;
 import java.util.List;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class OpusTest {
@@ -27,8 +29,12 @@ public class OpusTest {
         OkHttpClient httpClient = new OkHttpClient.Builder().build();
         ProfileServiceClient.Builder builder = new ProfileServiceClient.Builder(httpClient, "https://devt.ala.org.au/profile-service/");
         ProfileServiceClient client = builder.build();
-        Call<List<Opus>> call = client.getOperaByTag("calendars", userId, Collections.emptyMap());
-        List<Opus> opera = call.execute().body();
+        Call<List<Opus>> call = client.getOperaByTag("FLORA", userId, Collections.emptyMap());
+
+        Response<List<Opus>> response = call.execute();
+
+        assertEquals(response.code(), 200);
+        List<Opus> opera = response.body();
 
         for (Opus opus : opera) {
             System.out.println(opus.getUuid());

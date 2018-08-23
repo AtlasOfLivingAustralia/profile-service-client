@@ -1,7 +1,7 @@
 package au.org.ala.profiles.service;
 
+import au.org.ala.profiles.service.moshi.MillisSinceEpochDateJsonAdapter;
 import com.squareup.moshi.Moshi;
-import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -31,53 +31,50 @@ public interface ProfileServiceClient {
     String DEFAULT_AUTH_HEADER = "X-ALA-userId";
     String DEFAULT_API_KEY_HEADER = "apiKey";
 
-    @GET("/tags/{tag}/opuses")
+    @GET("tags/{tag}/opuses")
     Call<List<Opus>> getOperaByTag(@Path("tag") String tag, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @QueryMap Map<String, String> params);
 
-    @POST("/opus")
+    @POST("opus")
     Call<Void> createOpus(@Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
 
-    @GET("/opus/{opusId}")
+    @GET("opus/{opusId}")
     Call<Opus> getOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @POST("/opus/{opusId}")
+    @POST("opus/{opusId}")
     Call<Void> updateOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
-    @DELETE("/opus/{opusId}")
+    @DELETE("opus/{opusId}")
     Call<Void> deleteOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
-    @PUT("/opus/{opusId}/profile")
+    @PUT("opus/{opusId}/profile")
     Call<Void> createProfile(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
 
-    @GET("/opus/{opusId}/profile/{profileId}")
+    @GET("opus/{opusId}/profile/{profileId}")
     Call<Profile> getProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @POST("/opus/{opusId}/profile/{profileId}")
+    @POST("opus/{opusId}/profile/{profileId}")
     Call<Void> updateProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
-    @DELETE("/opus/{opusId}/profile/{profileId}")
+    @DELETE("opus/{opusId}/profile/{profileId}")
     Call<Void> deleteProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
-    @POST("/opus/{opusId}/profile/{profileId}/toggleDraftMode")
+    @POST("opus/{opusId}/profile/{profileId}/toggleDraftMode")
     Call<Void> toggleDraftMode(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @POST("/opus/{opusId}/profile/{profileId}/discardDraftChanges")
+    @POST("opus/{opusId}/profile/{profileId}/discardDraftChanges")
     Call<Void> discardDraftChanges(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @POST("/opus/{opusId}/profile/{profileId}/rename")
+    @POST("opus/{opusId}/profile/{profileId}/rename")
     Call<Void> renameProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
-//            "/opus/$opusId/profile/$profileId/attribute/" controller: "attribute", action: [GET: "index", PUT: "create", POST: "create"]
-//            "/opus/$opusId/profile/$profileId/attribute/$attributeId" controller: "attribute", action: [GET: "show", PUT: "update", DELETE: "delete", POST: "update"]
-
-    @GET("/opus/{opusId}/profile/{profileId}/attribute")
+    @GET("opus/{opusId}/profile/{profileId}/attribute")
     Call<List<Attribute>> getAttributes(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @PUT("/opus/{opusId}/profile/{profileId}/attribute")
+    @PUT("opus/{opusId}/profile/{profileId}/attribute")
     Call<Attribute> createAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
-    @POST("/opus/{opusId}/profile/{profileId}/attribute")
+    @POST("opus/{opusId}/profile/{profileId}/attribute")
     Call<Attribute> createAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
 
-    @GET("/opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
+    @GET("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Attribute> getAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
-    @PUT("/opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
+    @PUT("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> updateAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
-    @POST("/opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
+    @POST("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> updateAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
-    @DELETE("/opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
+    @DELETE("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> deleteAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
     /**
@@ -112,7 +109,7 @@ public interface ProfileServiceClient {
         }
 
         Moshi defaultMoshi() {
-            return new Moshi.Builder().add(Date.class, new Rfc3339DateJsonAdapter().nullSafe()).build();
+            return new Moshi.Builder().add(Date.class, new MillisSinceEpochDateJsonAdapter().nullSafe()).build();
         }
 
         /**
