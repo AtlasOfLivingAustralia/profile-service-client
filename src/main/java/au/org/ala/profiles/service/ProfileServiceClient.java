@@ -36,22 +36,22 @@ public interface ProfileServiceClient {
     Call<List<Opus>> getOperaByTag(@Path("tag") String tag, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @QueryMap Map<String, String> params);
 
     @POST("opus")
-    Call<Void> createOpus(@Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
+    Call<Opus> createOpus(@Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
 
     @GET("opus/{opusId}")
     Call<Opus> getOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @POST("opus/{opusId}")
-    Call<Void> updateOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
+    Call<UpdateOpusResponse> updateOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Opus opus);
     @DELETE("opus/{opusId}")
     Call<Void> deleteOpus(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
     @PUT("opus/{opusId}/profile")
-    Call<Void> createProfile(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
+    Call<Profile> createProfile(@Path("opusId") String opusId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
 
     @GET("opus/{opusId}/profile/{profileId}")
     Call<Profile> getProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @POST("opus/{opusId}/profile/{profileId}")
-    Call<Void> updateProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
+    Call<Profile> updateProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Profile profile);
     @DELETE("opus/{opusId}/profile/{profileId}")
     Call<Void> deleteProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
