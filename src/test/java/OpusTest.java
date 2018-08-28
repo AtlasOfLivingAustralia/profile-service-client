@@ -26,7 +26,7 @@ public class OpusTest {
     @Ignore
     public void testProfileServiceClient() throws Exception {
         OkHttpClient httpClient = new OkHttpClient.Builder().build();
-        ProfileServiceClient.Builder builder = new ProfileServiceClient.Builder(httpClient, "https://devt.ala.org.au/profile-service/");
+        ProfileServiceClient.Builder builder = new ProfileServiceClient.Builder(httpClient, "https://devt.ala.org.au/profile-service/", "xxx");
         ProfileServiceClient client = builder.build();
         Call<List<Opus>> call = client.getOperaByTag("FLORA", userId, Collections.emptyMap());
 

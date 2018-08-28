@@ -120,13 +120,14 @@ public interface ProfileServiceClient {
          * @param okHttpClient The OkHttpClient to use
          * @param baseUrl      The base URL of the User Details service
          */
-        public Builder(OkHttpClient okHttpClient, String baseUrl) {
+        public Builder(OkHttpClient okHttpClient, String baseUrl, String apiKey) {
             this.okHttpClient = okHttpClient;
             if (!baseUrl.endsWith("/")) {
                 log.warning("Profile Service Base URL (" + baseUrl + ") does not end with a /");
                 baseUrl += "/";
             }
             this.baseUrl = HttpUrl.parse(baseUrl);
+            this.apiKey = apiKey;
         }
 
         Moshi defaultMoshi() {
