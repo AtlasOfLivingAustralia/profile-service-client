@@ -119,6 +119,7 @@ public interface ProfileServiceClient {
          *
          * @param okHttpClient The OkHttpClient to use
          * @param baseUrl      The base URL of the User Details service
+         * @param apiKey       Api Key for the service
          */
         public Builder(OkHttpClient okHttpClient, String baseUrl, String apiKey) {
             this.okHttpClient = okHttpClient;
