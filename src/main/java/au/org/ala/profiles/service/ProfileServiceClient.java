@@ -119,9 +119,8 @@ public interface ProfileServiceClient {
          *
          * @param okHttpClient The OkHttpClient to use
          * @param baseUrl      The base URL of the User Details service
-         * @param apiKey       Api Key for the service
          */
-        public Builder(OkHttpClient okHttpClient, String baseUrl, String apiKey) {
+        public Builder(OkHttpClient okHttpClient, String baseUrl) {
             this.okHttpClient = okHttpClient;
             if (!baseUrl.endsWith("/")) {
                 log.warning("Profile Service Base URL (" + baseUrl + ") does not end with a /");
