@@ -33,15 +33,15 @@ public class Opus {
 
     String dataResourceUid;
 
-    BrandingConfig brandingConfig;
+    BrandingConfig brandingConfig = new BrandingConfig();
 
-    MapConfig mapConfig;
+    MapConfig mapConfig = new MapConfig();
 
-    OpusLayoutConfig opusLayoutConfig;
+    OpusLayoutConfig opusLayoutConfig = new OpusLayoutConfig();
 
-    Theme theme;
+    Theme theme = new Theme();
 
-    HelpLink help;
+    HelpLink help = new HelpLink();
 
     String attributeVocabUuid;
 

@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +55,7 @@ public class Profile {
 
     String primaryImage;
 
-    Map<String, ImageSettings> imageSettings;
+    Map<String, ImageSettings> imageSettings = new HashMap<>();
 
     String primaryVideo;
 
@@ -61,31 +63,31 @@ public class Profile {
 
     boolean showLinkedOpusAttributes;
 
-    List<String> specimenIds;
+    List<String> specimenIds = new ArrayList<>();
 
-    List<Authorship> authorship;
+    List<Authorship> authorship = new ArrayList<>();
 
-    List<Classification> classification;
+    List<Classification> classification = new ArrayList<>();
 
     boolean manualClassification;
 
-    List<Link> links;
+    List<Link> links = new ArrayList<>();
 
-    List<Link> bhlLinks;
+    List<Link> bhlLinks = new ArrayList<>();
 
-    List<Bibliography> bibliography;
+    List<Bibliography> bibliography = new ArrayList<>();
 
-    List<Document> documents;
+    List<Document> documents = new ArrayList<>();
 
-    List<Publication> publications;
+    List<Publication> publications = new ArrayList<>();
 
-    List<LocalImage> privateImages;
+    List<LocalImage> privateImages = new ArrayList<>();
 
-    List<LocalImage> stagedImages;
+    List<LocalImage> stagedImages = new ArrayList<>();
 
-    List<Attachment> attachments;
+    List<Attachment> attachments = new ArrayList<>();
 
-    List<Attribute> attributes;
+    List<Attribute> attributes = new ArrayList<>();
 
     String lastAttributeChange;
 
@@ -111,6 +113,6 @@ public class Profile {
 
     String scientificNameLower;
 
-    ProfileSettings profileSettings;
+    ProfileSettings profileSettings = new ProfileSettings();
 
 }

@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,26 +34,26 @@ public class DraftProfile {
     String occurrenceQuery;
     boolean customMapConfig;
     String profileStatus;
-    Map<String, ImageSettings> imageSettings;
-    List<String> specimenIds;
-    List<Authorship> authorship;
-    List<Classification> classification;
+    Map<String, ImageSettings> imageSettings = new HashMap<>();
+    List<String> specimenIds = new ArrayList<>();
+    List<Authorship> authorship = new ArrayList<>();
+    List<Classification> classification = new ArrayList<>();
     boolean manualClassification;
-    List<Link> links;
-    List<Link> bhlLinks;
-    List<Attribute> attributes;
-    List<Publication> publications;
-    List<Bibliography> bibliography;
-    List<Document> documents;
-    List<LocalImage> stagedImages;
-    List<LocalImage> privateImages;
-    List<Attachment> attachments;
+    List<Link> links = new ArrayList<>();
+    List<Link> bhlLinks = new ArrayList<>();
+    List<Attribute> attributes = new ArrayList<>();
+    List<Publication> publications = new ArrayList<>();
+    List<Bibliography> bibliography = new ArrayList<>();
+    List<Document> documents = new ArrayList<>();
+    List<LocalImage> stagedImages = new ArrayList<>();
+    List<LocalImage> privateImages = new ArrayList<>();
+    List<Attachment> attachments = new ArrayList<>();
     String lastAttributeChange;
 
     Date dateCreated;
     Date draftDate;
     String createdBy;
     Date lastPublished;
-    ProfileSettings profileSettings;
+    ProfileSettings profileSettings = new ProfileSettings();
 
 }

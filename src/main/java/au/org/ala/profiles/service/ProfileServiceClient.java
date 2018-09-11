@@ -81,22 +81,6 @@ public interface ProfileServiceClient {
 
     @GET("profile/search")
     Call<SearchResults> search(@Query("opusId") String opusId, @Query("term") String term, @Query("pageSize") int pageSize, @Query("offset") int offset, @Query("nameOnly") boolean nameOnly, @Query("includeArchived") boolean includeArchived, @Query("matchAll") boolean matchAll, @Query("searchAla") boolean searchAla, @Query("searchNsl") boolean searchNsl, @Query("includeNameAttributes") boolean includeNameAttributes, @Query("hideStubs") boolean hideStubs);
-    /*
-    List<String> opusIds = params.opusId?.split(",") ?: []
-
-        String term = params.term as String
-        int pageSize = params.pageSize ? params.pageSize as int : -1
-        int offset = params.offset ? params.offset as int : 0
-
-        SearchOptions options = new SearchOptions()
-        options.nameOnly = params.nameOnly?.toBoolean()
-        options.includeArchived = params.boolean ('includeArchived', false)
-        options.matchAll = params.matchAll?.toBoolean()
-        options.searchAla = params.boolean ('searchAla', false)
-        options.searchNsl = params.boolean ('searchNsl', false)
-        options.includeNameAttributes = params.includeNameAttributes?.toBoolean()
-        options.hideStubs = params.boolean ('hideStubs', true)
-     */
 
     /**
      * A Builder for generating ProfileServiceClient instances.
@@ -127,7 +111,6 @@ public interface ProfileServiceClient {
                 baseUrl += "/";
             }
             this.baseUrl = HttpUrl.parse(baseUrl);
-            this.apiKey = apiKey;
         }
 
         Moshi defaultMoshi() {
