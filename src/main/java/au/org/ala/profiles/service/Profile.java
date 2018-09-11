@@ -55,7 +55,7 @@ public class Profile {
 
     String primaryImage;
 
-    Map<String, ImageSettings> imageSettings = new HashMap<>();
+    @Builder.Default Map<String, ImageSettings> imageSettings = new HashMap<>();
 
     String primaryVideo;
 
@@ -63,31 +63,31 @@ public class Profile {
 
     boolean showLinkedOpusAttributes;
 
-    List<String> specimenIds = new ArrayList<>();
+    @Builder.Default List<String> specimenIds = new ArrayList<>();
 
-    List<Authorship> authorship = new ArrayList<>();
+    @Builder.Default List<Authorship> authorship = new ArrayList<>();
 
-    List<Classification> classification = new ArrayList<>();
+    @Builder.Default List<Classification> classification = new ArrayList<>();
 
     boolean manualClassification;
 
-    List<Link> links = new ArrayList<>();
+    @Builder.Default List<Link> links = new ArrayList<>();
 
-    List<Link> bhlLinks = new ArrayList<>();
+    @Builder.Default List<Link> bhlLinks = new ArrayList<>();
 
-    List<Bibliography> bibliography = new ArrayList<>();
+    @Builder.Default List<Bibliography> bibliography = new ArrayList<>();
 
-    List<Document> documents = new ArrayList<>();
+    @Builder.Default List<Document> documents = new ArrayList<>();
 
-    List<Publication> publications = new ArrayList<>();
+    @Builder.Default List<Publication> publications = new ArrayList<>();
 
-    List<LocalImage> privateImages = new ArrayList<>();
+    @Builder.Default List<LocalImage> privateImages = new ArrayList<>();
 
-    List<LocalImage> stagedImages = new ArrayList<>();
+    @Builder.Default List<LocalImage> stagedImages = new ArrayList<>();
 
-    List<Attachment> attachments = new ArrayList<>();
+    @Builder.Default List<Attachment> attachments = new ArrayList<>();
 
-    List<Attribute> attributes = new ArrayList<>();
+    @Builder.Default List<Attribute> attributes = new ArrayList<>();
 
     String lastAttributeChange;
 
@@ -113,6 +113,6 @@ public class Profile {
 
     String scientificNameLower;
 
-    ProfileSettings profileSettings = new ProfileSettings();
+    @Builder.Default ProfileSettings profileSettings = new ProfileSettings();
 
 }

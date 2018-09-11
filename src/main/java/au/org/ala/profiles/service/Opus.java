@@ -33,15 +33,15 @@ public class Opus {
 
     String dataResourceUid;
 
-    BrandingConfig brandingConfig = new BrandingConfig();
+    @Builder.Default BrandingConfig brandingConfig = new BrandingConfig();
 
-    MapConfig mapConfig = new MapConfig();
+    @Builder.Default MapConfig mapConfig = new MapConfig();
 
-    OpusLayoutConfig opusLayoutConfig = new OpusLayoutConfig();
+    @Builder.Default OpusLayoutConfig opusLayoutConfig = new OpusLayoutConfig();
 
-    Theme theme = new Theme();
+    @Builder.Default Theme theme = new Theme();
 
-    HelpLink help = new HelpLink();
+    @Builder.Default HelpLink help = new HelpLink();
 
     String attributeVocabUuid;
 
