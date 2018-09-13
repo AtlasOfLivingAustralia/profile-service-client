@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,10 +18,20 @@ public class Opus {
     /*
 
         masterListUid nullable: true
-        profileLayoutConfig nullable: true
-        mapConfig nullable: true
-        dataResourceConfig nullable: true
+
         featureListSectionName nullable: true
+
+        //marshalled
+        masterListUid              : opus.masterListUid,
+
+        supportingOpuses           : marshalSupportingOpuses(opus.supportingOpuses?.findAll {
+            it.requestStatus == ShareRequestStatus.ACCEPTED
+        }),
+        requestedSupportingOpuses  : marshalSupportingOpuses(opus.supportingOpuses?.findAll {
+            it.requestStatus != ShareRequestStatus.ACCEPTED
+        }),
+        sharingDataWith            : marshalSupportingOpuses(opus.sharingDataWith),
+        florulaListId              : opus.florulaListId ?: '',
 
      */
 
@@ -33,9 +45,19 @@ public class Opus {
 
     String dataResourceUid;
 
+    @Builder.Default DataResourceConfig dataResourceConfig = new DataResourceConfig();
+
+    @Builder.Default ImageOption approvedImageOption = ImageOption.INCLUDE;
+
+    @Builder.Default List<String> approvedLists = new ArrayList<>();
+
+    @Builder.Default List<String> featureLists = new ArrayList<>();
+
+    String featureListSectionName;
+
     @Builder.Default BrandingConfig brandingConfig = new BrandingConfig();
 
-    @Builder.Default MapConfig mapConfig = new MapConfig();
+    @Builder.Default ProfileLayoutConfig profileLayoutConfig = new ProfileLayoutConfig();
 
     @Builder.Default OpusLayoutConfig opusLayoutConfig = new OpusLayoutConfig();
 
@@ -43,9 +65,19 @@ public class Opus {
 
     @Builder.Default HelpLink help = new HelpLink();
 
+    String keybaseProjectId;
+
+    String keybaseKeyId;
+
     String attributeVocabUuid;
 
     String authorshipVocabUuid;
+
+    boolean autoDraftProfiles;
+
+    String glossaryUuid;
+
+    @Builder.Default List<Attachment> attachments = new ArrayList<>();
 
     Boolean enablePhyloUpload;
 
@@ -55,17 +87,33 @@ public class Opus {
 
     Boolean enableKeyUpload;
 
-    Boolean showLinkedOpusAttributes;
+    boolean privateCollection;
+
+    boolean keepImagesPrivate;
+
+    boolean usePrivateRecordData;
+
+    @Builder.Default MapConfig mapConfig = new MapConfig();
+
+    boolean autoApproveShareRequests;
 
     Boolean allowCopyFromLinkedOpus;
 
+    Boolean showLinkedOpusAttributes;
+
     Boolean allowFineGrainedAttribution;
 
-    boolean privateCollection;
+    @Builder.Default List<Authority> authorities = new ArrayList<>();
 
-    String keybaseProjectId;
+    String copyrightText;
 
-    String keybaseKeyId;
+    String footerText;
+
+    @Builder.Default Contact contact = new Contact();
+
+    Boolean hasAboutPage;
+
+    Integer profileCount;
 
     String aboutHtml;
 
@@ -73,27 +121,11 @@ public class Opus {
 
     String citationProfile;
 
-    String copyrightText;
-
-    String footerText;
-
-    String email;
-
-    String facebook;
-
-    String twitter;
-
-    boolean autoApproveShareRequests;
-
-    boolean keepImagesPrivate;
-
-    boolean usePrivateRecordData;
-
-    ImageOption approvedImageOption;
-
     String accessToken;
 
-    boolean autoDraftProfiles;
+    @Builder.Default List<Tag> tags = new ArrayList<>();
+
+    @Builder.Default List<String> additionalStatuses = new ArrayList<>();
 
     Date dateCreated;
 

@@ -32,6 +32,13 @@ public interface ProfileServiceClient {
     String DEFAULT_AUTH_HEADER = "X-ALA-userId";
     String DEFAULT_API_KEY_HEADER = "apiKey";
 
+    @GET("tags")
+    Call<List<Tag>> getTags(@Header(DEFAULT_AUTH_HEADER) String alaUserId);
+    @GET("admin/tag")
+    Call<List<Tag>> getAdminTags(@Header(DEFAULT_AUTH_HEADER) String alaUserId);
+    @GET("admin/tag/{tagId}")
+    Call<Tag> getAdminTag(@Path("tagId") String tagId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
+
     @GET("tags/{tag}/opuses")
     Call<List<Opus>> getOperaByTag(@Path("tag") String tag, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @QueryMap Map<String, String> params);
 
@@ -78,7 +85,6 @@ public interface ProfileServiceClient {
     @DELETE("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> deleteAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
-
     @GET("profile/search")
     Call<SearchResults> search(@Query("opusId") String opusId, @Query("term") String term, @Query("pageSize") int pageSize, @Query("offset") int offset, @Query("nameOnly") boolean nameOnly, @Query("includeArchived") boolean includeArchived, @Query("matchAll") boolean matchAll, @Query("searchAla") boolean searchAla, @Query("searchNsl") boolean searchNsl, @Query("includeNameAttributes") boolean includeNameAttributes, @Query("hideStubs") boolean hideStubs);
 
@@ -91,21 +97,23 @@ public interface ProfileServiceClient {
     @Accessors(fluent = true, chain = true)
     @RequiredArgsConstructor
     class Builder {
-        private final OkHttpClient okHttpClient;
+        private final okhttp3.Call.Factory callFactory;
         private final HttpUrl baseUrl;
 
+        /** The moshi instance should be pre-configured with a JsonAdapter that converts java.util.Date objects to millis since epoch longs */
         private Moshi moshi = null;
+        /** Setting an apikey requires that the call factory is actually an OkHttpClient */
         private String apiKey = null;
 
         /**
-         * Create a Builder using an okHttpClient and String baseUrl.  The baseUrl will be
+         * Create a Builder using an OkHttp3 Call.Factory and String baseUrl.  The baseUrl will be
          * converted to an HttpUrl and a trailing / will be added if required.
          *
-         * @param okHttpClient The OkHttpClient to use
+         * @param callFactory The OkHttpClient to use
          * @param baseUrl      The base URL of the User Details service
          */
-        public Builder(OkHttpClient okHttpClient, String baseUrl) {
-            this.okHttpClient = okHttpClient;
+        public Builder(okhttp3.Call.Factory callFactory, String baseUrl) {
+            this.callFactory = callFactory;
             if (!baseUrl.endsWith("/")) {
                 log.warning("Profile Service Base URL (" + baseUrl + ") does not end with a /");
                 baseUrl += "/";
@@ -121,22 +129,27 @@ public interface ProfileServiceClient {
          * Create the UserDetailsClient instance.  If a gson instance is not supplied, one will
          * be created.
          *
-         * @return A UserDetailsClient using the supplied okhttpclient, baseUrl and gson.
+         * @return A UserDetailsClient using the supplied callFactory, baseUrl and moshi.
          */
         public ProfileServiceClient build() {
 
             val moshi = this.moshi != null ? this.moshi : defaultMoshi();
 
-            final OkHttpClient client;
-            if (apiKey != null) {
-                client = okHttpClient.newBuilder().addInterceptor(chain -> chain.proceed(chain.request().newBuilder().addHeader(DEFAULT_API_KEY_HEADER, apiKey).build())).build();
+            final okhttp3.Call.Factory client;
+            if (apiKey != null && !apiKey.equals("")) {
+                if (callFactory instanceof OkHttpClient) {
+                    val okhttpclient = (OkHttpClient) callFactory;
+                    client = okhttpclient.newBuilder().addInterceptor(chain -> chain.proceed(chain.request().newBuilder().addHeader(DEFAULT_API_KEY_HEADER, apiKey).build())).build();
+                } else {
+                    throw new IllegalStateException("Setting the API key requires an okhttp3.OkHttpClient is provided for the Call.Factory");
+                }
             } else {
-                client = okHttpClient;
+                client = callFactory;
             }
 
             return new Retrofit.Builder()
                     .addConverterFactory(MoshiConverterFactory.create(moshi))
-                    .client(client)
+                    .callFactory(client)
                     .baseUrl(baseUrl)
                     .build()
                     .create(ProfileServiceClient.class);
