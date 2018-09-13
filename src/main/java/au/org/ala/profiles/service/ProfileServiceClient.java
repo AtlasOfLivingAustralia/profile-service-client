@@ -33,7 +33,7 @@ public interface ProfileServiceClient {
     String DEFAULT_API_KEY_HEADER = "apiKey";
 
     @GET("tags")
-    Call<List<Tag>> getTags(@Header(DEFAULT_AUTH_HEADER) String alaUserId);
+    Call<GetTagsResponse> getTags(@Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @GET("admin/tag")
     Call<List<Tag>> getAdminTags(@Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @GET("admin/tag/{tagId}")
