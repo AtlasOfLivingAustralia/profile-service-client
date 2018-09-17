@@ -19,6 +19,8 @@ public class Profile {
 
     final static String STATUS_PARTIAL = "Partial";
 
+    String opusUuid;
+
     String uuid;
 
     String guid;

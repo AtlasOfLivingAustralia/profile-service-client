@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Authorship {
-    Term category;
+    Term category = new Term();
     String text;
 }
