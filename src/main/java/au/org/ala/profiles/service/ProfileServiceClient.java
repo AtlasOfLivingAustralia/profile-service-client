@@ -100,14 +100,14 @@ public interface ProfileServiceClient {
         private final okhttp3.Call.Factory callFactory;
         private final HttpUrl baseUrl;
 
-        /** The moshi instance should be pre-configured with a JsonAdapter that converts java.util.Date objects to millis since epoch longs */
+        /** The moshi instance should be pre-configured with a {@link com.squareup.moshi.JsonAdapter} that converts {@link java.util.Date} objects to millis since epoch {@code long}s */
         private Moshi moshi = null;
-        /** Setting an apikey requires that the call factory is actually an OkHttpClient */
+        /** Setting an apikey requires that the call factory is actually an {@link OkHttpClient} */
         private String apiKey = null;
 
         /**
-         * Create a Builder using an OkHttp3 Call.Factory and String baseUrl.  The baseUrl will be
-         * converted to an HttpUrl and a trailing / will be added if required.
+         * Create a Builder using an {@link okhttp3.Call.Factory} and {@link String} baseUrl.  The baseUrl will be
+         * converted to an {@link HttpUrl} and a trailing / will be added if required.
          *
          * @param callFactory The OkHttpClient to use
          * @param baseUrl      The base URL of the User Details service
@@ -138,8 +138,8 @@ public interface ProfileServiceClient {
             final okhttp3.Call.Factory client;
             if (apiKey != null && !apiKey.equals("")) {
                 if (callFactory instanceof OkHttpClient) {
-                    val okhttpclient = (OkHttpClient) callFactory;
-                    client = okhttpclient.newBuilder().addInterceptor(chain -> chain.proceed(chain.request().newBuilder().addHeader(DEFAULT_API_KEY_HEADER, apiKey).build())).build();
+                    val okHttpClient = (OkHttpClient) callFactory;
+                    client = okHttpClient.newBuilder().addInterceptor(chain -> chain.proceed(chain.request().newBuilder().addHeader(DEFAULT_API_KEY_HEADER, apiKey).build())).build();
                 } else {
                     throw new IllegalStateException("Setting the API key requires an okhttp3.OkHttpClient is provided for the Call.Factory");
                 }
