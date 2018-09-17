@@ -127,8 +127,8 @@ public class Opus {
 
     @Builder.Default List<String> additionalStatuses = new ArrayList<>();
 
-    Date dateCreated;
+    Long dateCreated;
 
-    Date lastUpdated;
+    Long lastUpdated;
 
 }

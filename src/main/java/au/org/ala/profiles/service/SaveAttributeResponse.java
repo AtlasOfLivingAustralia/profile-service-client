@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImageSettings {
-    String imageId;
-    String caption;
-    ImageOption imageDisplayOption;
+public class SaveAttributeResponse {
+    boolean success = true;
+    String attributeId;
 }

@@ -1,7 +1,7 @@
 package au.org.ala.profiles.service;
 
-import au.org.ala.profiles.service.moshi.MillisSinceEpochDateJsonAdapter;
 import com.squareup.moshi.Moshi;
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -72,16 +72,16 @@ public interface ProfileServiceClient {
     @GET("opus/{opusId}/profile/{profileId}/attribute")
     Call<List<Attribute>> getAttributes(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @PUT("opus/{opusId}/profile/{profileId}/attribute")
-    Call<Attribute> createAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> createAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body NewAttribute attribute);
     @POST("opus/{opusId}/profile/{profileId}/attribute")
-    Call<Attribute> createAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> createAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body NewAttribute attribute);
 
     @GET("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Attribute> getAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @PUT("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
-    Call<Void> updateAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> updateAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
     @POST("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
-    Call<Void> updateAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> updateAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
     @DELETE("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> deleteAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
@@ -122,7 +122,7 @@ public interface ProfileServiceClient {
         }
 
         Moshi defaultMoshi() {
-            return new Moshi.Builder().add(Date.class, new MillisSinceEpochDateJsonAdapter().nullSafe()).build();
+            return new Moshi.Builder().add(Date.class, new Rfc3339DateJsonAdapter().nullSafe()).build();
         }
 
         /**

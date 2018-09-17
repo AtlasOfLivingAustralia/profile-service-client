@@ -34,7 +34,7 @@ public class DraftProfile {
     String occurrenceQuery;
     boolean customMapConfig;
     String profileStatus;
-    Map<String, ImageSettings> imageSettings = new HashMap<>();
+    List<ImageSettings> imageSettings = new ArrayList<>();
     List<String> specimenIds = new ArrayList<>();
     List<Authorship> authorship = new ArrayList<>();
     List<Classification> classification = new ArrayList<>();

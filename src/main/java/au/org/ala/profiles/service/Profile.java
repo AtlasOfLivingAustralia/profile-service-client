@@ -57,7 +57,7 @@ public class Profile {
 
     String primaryImage;
 
-    @Builder.Default Map<String, ImageSettings> imageSettings = new HashMap<>();
+    @Builder.Default List<ImageSettings> imageSettings = new ArrayList<>();
 
     String primaryVideo;
 
@@ -116,5 +116,7 @@ public class Profile {
     String scientificNameLower;
 
     @Builder.Default ProfileSettings profileSettings = new ProfileSettings();
+
+    String manuallyMatchedGuid;
 
 }
