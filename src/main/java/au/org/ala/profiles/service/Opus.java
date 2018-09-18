@@ -109,6 +109,15 @@ public class Opus {
 
     String footerText;
 
+    /** For creating an opus only.  For retrieving or updating use contact.facebook */
+    String facebook;
+
+    /** For creating an opus only.  For retrieving or updating use contact.twitter */
+    String twitter;
+
+    /** For creating an opus only.  For retrieving or updating use contact.email */
+    String email;
+
     @Builder.Default Contact contact = new Contact();
 
     Boolean hasAboutPage;

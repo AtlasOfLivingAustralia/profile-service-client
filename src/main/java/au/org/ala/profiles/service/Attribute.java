@@ -14,14 +14,23 @@ import java.util.List;
 @NoArgsConstructor
 public class Attribute {
 
-    String uuid;
-    Term title = new Term();
-    String text;
-    Attribute original;
-    String source;
+    /*
+     */
 
-    List<Contributor> creators = new ArrayList<>();
-    List<Contributor> editors = new ArrayList<>();
+    String uuid;
+//    Term title = new Term();
+    String title;
+    Integer order;
+    Boolean required;
+    Boolean containsName;
+    String summary;
+    String text;
+    String source;
+    String plainText;
+    Attribute original;
+
+    List<String> creators;
+    List<String> editors;
 
     Date dateCreated;
     Date lastUpdated;

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewAttribute {
+public class AttributeUpdate {
 
     String title;
     String text;

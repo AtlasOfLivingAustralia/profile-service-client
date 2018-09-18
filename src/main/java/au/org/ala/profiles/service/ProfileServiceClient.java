@@ -67,21 +67,21 @@ public interface ProfileServiceClient {
     @POST("opus/{opusId}/profile/{profileId}/discardDraftChanges")
     Call<Void> discardDraftChanges(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @POST("opus/{opusId}/profile/{profileId}/rename")
-    Call<Void> renameProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
+    Call<Profile> renameProfile(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body RenameProfileRequest renameProfileRequest);
 
     @GET("opus/{opusId}/profile/{profileId}/attribute")
     Call<List<Attribute>> getAttributes(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @PUT("opus/{opusId}/profile/{profileId}/attribute")
-    Call<SaveAttributeResponse> createAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body NewAttribute attribute);
+    Call<SaveAttributeResponse> createAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body AttributeUpdate attribute);
     @POST("opus/{opusId}/profile/{profileId}/attribute")
-    Call<SaveAttributeResponse> createAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body NewAttribute attribute);
+    Call<SaveAttributeResponse> createAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body AttributeUpdate attribute);
 
     @GET("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Attribute> getAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
     @PUT("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
-    Call<SaveAttributeResponse> updateAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> updateAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body AttributeUpdate attribute);
     @POST("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
-    Call<SaveAttributeResponse> updateAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body Attribute attribute);
+    Call<SaveAttributeResponse> updateAttribute2(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId, @Body AttributeUpdate attribute);
     @DELETE("opus/{opusId}/profile/{profileId}/attribute/{attributeId}")
     Call<Void> deleteAttribute(@Path("opusId") String opusId, @Path("profileId") String profileId, @Path("attributeId") String attributeId, @Header(DEFAULT_AUTH_HEADER) String alaUserId);
 
