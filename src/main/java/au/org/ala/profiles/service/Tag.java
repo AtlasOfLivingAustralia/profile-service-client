@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tag {
 
+    // Preserve id so that they can be matched for creating opera
+    Long id;
+
     String uuid;
 
     String colour;
