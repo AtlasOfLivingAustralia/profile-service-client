@@ -23,7 +23,7 @@ public class Attribute {
     Integer order;
     Boolean required;
     Boolean containsName;
-    String summary;
+    Boolean summary;
     String text;
     String source;
     String plainText;
